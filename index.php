@@ -1,11 +1,12 @@
 <?php
 require 'views.php';   
 require 'Router.php';  
+require 'TextFormatter.php';
 
 Router::get('/home', function () {
     view('home', [
-        'name' => 'Jānis',
-        'email' => 'janis@piemers.lv'
+        'name' => 'I wanna go home',
+        'email' => 'Iwanna@gohome.pls'
     ]);
 });
 
@@ -14,4 +15,14 @@ Router::post('/submit', function () {
 });
 
 Router::dispatch();
+
+Router::get('/home', function(){
+    $formatter = new TextFormatter("Es gribu mājās :(");
+    $formatted = $formatter->toUpperCase()->removeSpaces()->append("!")->getFormattedText();
+
+    view('home',[
+        'name' => $formatted,
+        'email' => 'Iwanna@gohome.pls'
+    ]);
+});
 
